@@ -42,11 +42,17 @@ public class MainActivity extends AppCompatActivity {
         btnTrue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (cont == questionsList.size()){
+                    cont = 0;
+                    startActivity(new Intent(MainActivity.this, ResultadoFinalActivity.class));
+                }
                 if (questionsList.get(cont).getReposta().toLowerCase().trim().equals("verdadeiro")) {
                     Toast.makeText(MainActivity.this, "Acertou", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(MainActivity.this, "Errou", Toast.LENGTH_SHORT).show();
                 }
+
+
                 cont++;
                 txvPerguta.setText(questionsList.get(cont).getPergunta());
             }
@@ -54,6 +60,10 @@ public class MainActivity extends AppCompatActivity {
         btnFalse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (cont == questionsList.size()){
+                    cont = 0;
+                    startActivity(new Intent(MainActivity.this, ResultadoFinalActivity.class));
+                }
                 if (questionsList.get(cont).getReposta().toLowerCase().trim().equals("falso")) {
                     Toast.makeText(MainActivity.this, "Acertou", Toast.LENGTH_SHORT).show();
                 } else {
@@ -61,13 +71,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 cont++;
                 txvPerguta.setText(questionsList.get(cont).getPergunta());
-                if (cont == questionsList.size()){
-                    startActivity(new Intent());
-                }
             }
         });
-
-
     }
 
     private void preenchendoListaDePerguntas() {
