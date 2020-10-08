@@ -3,37 +3,53 @@ package com.example.quizigti;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.telephony.mbms.StreamingServiceInfo;
 import android.util.Log;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String CONTENT = "A linguagem oficial para desenvolvimento Android Nativo pela Google é a Kotlin; verdadeiro\n" +
-            "O processo de publicação do aplicativo na Google Play é gratuito; false\n" +
-            "O Brasil possui uma população de quase 210 milhões; verdadeiro\n" +
-            "Flutter é uma dos frameworks de desenvolvimento mobile; verdadeiro\n" +
-            "A linguagem de programação do Flutter é o Dart; verdadeiro\n" +
-            "O Flutter possui interoperabilidade e pode ter projetos em Java e Dart; falso\n" +
-            "React-Native é uma plataforma para desenvolvimento de aplicativos móveis; verdadeiro\n" +
-            "O Kotlin possui interoperabilidade oque possibilita implementar projetos em Java e Kotlin; verdadeiro";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        importQuestions(CONTENT);
+        List<String> bacon =importQuestions();
+        for (String item:
+             bacon) {
+            Log.i("BACON", item);
+        }
+        
 
-        readQuestions();
     }
 
-    private void readQuestions() {
+    private List<String> importQuestions() {
+        AssetManager assetManager = getAssets();
+        InputStream inputStream;
+        List<String> linhas = new ArrayList<>();
+        try {
+            inputStream = assetManager.open("Perguntas-1.txt");
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+            BufferedReader reader = new BufferedReader(inputStreamReader);
+            String line;
 
-    }
-
-    private void importQuestions(String content) {
-
+            while ((line = reader.readLine()) != null) {
+                linhas.add(line);
+            }
+            inputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return linhas;
     }
 }
