@@ -25,12 +25,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         List<String> bacon =importQuestions();
+        List<Questions> questionsList  = new ArrayList<>();
         for (String item:
              bacon) {
-            Log.i("BACON", item);
+           String pergunta[] = item.split(";");
+           Questions questions = new Questions(pergunta[0], pergunta[1]);
+           questionsList.add(questions);
         }
-        
-
     }
 
     private List<String> importQuestions() {
