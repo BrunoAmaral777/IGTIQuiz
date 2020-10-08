@@ -7,6 +7,10 @@ import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.telephony.mbms.StreamingServiceInfo;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -20,17 +24,59 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    List<Questions> questionsList = new ArrayList<>();
+    TextView txvPerguta;
+    Button btnTrue;
+    Button btnFalse;
+    int cont = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        List<String> bacon =importQuestions();
-        List<Questions> questionsList  = new ArrayList<>();
-        for (String item:
-             bacon) {
-           String pergunta[] = item.split(";");
-           Questions questions = new Questions(pergunta[0], pergunta[1]);
-           questionsList.add(questions);
+        preenchendoListaDePerguntas();
+        txvPerguta = findViewById(R.id.txvPergunta);
+        btnTrue = findViewById(R.id.btnVerdadeiro);
+        btnFalse = findViewById(R.id.btnFalso);
+        txvPerguta.setText(questionsList.get(cont).getPergunta());
+        btnTrue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (questionsList.get(cont).getReposta().toLowerCase().trim().equals("verdadeiro")) {
+                    Toast.makeText(MainActivity.this, "Acertou", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "Errou", Toast.LENGTH_SHORT).show();
+                }
+                cont++;
+                txvPerguta.setText(questionsList.get(cont).getPergunta());
+            }
+        });
+        btnFalse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (questionsList.get(cont).getReposta().toLowerCase().trim().equals("falso")) {
+                    Toast.makeText(MainActivity.this, "Acertou", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "Errou", Toast.LENGTH_SHORT).show();
+                }
+                cont++;
+                txvPerguta.setText(questionsList.get(cont).getPergunta());
+                if (cont == questionsList.size()){
+                    startActivity(new Intent());
+                }
+            }
+        });
+
+
+    }
+
+    private void preenchendoListaDePerguntas() {
+        List<String> bacon = importQuestions();
+        for (String item :
+                bacon) {
+            String pergunta[] = item.split(";");
+            Questions questions = new Questions(pergunta[0], pergunta[1]);
+            questionsList.add(questions);
         }
     }
 
