@@ -20,9 +20,9 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/pergunta_cardView"
         android:layout_width="0dp"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        app:cardBackgroundColor="#FFFFFF"
+        app:cardBackgroundColor="#BF222222"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,42 +35,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/txvTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Será que você consegue \n adivinhar?"
-                android:textAlignment="center"
-                android:textSize="24sp"
-                android:layout_margin="8dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
-            <View
-                android:id="@+id/divisor"
-                android:layout_width="0dp"
-                android:layout_height="3dp"
-                android:layout_marginBottom="8dp"
-                android:background="@android:color/holo_orange_dark"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txvTitle" />
 
             <TextView
                 android:id="@+id/txvPergunta"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Pergunta a se fazer"
+                android:text="Pergunta a se fazer \n Pergunta"
+                android:foregroundGravity="center"
                 android:textAlignment="center"
+                android:textColor="#d3d3d3"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divisor" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -78,21 +58,20 @@
 
     <Button
         android:id="@+id/txvVerdadeiro"
-        android:layout_width="115dp"
-        android:layout_height="75dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:text="Verdadeiro"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/txvFalso"
+        app:layout_constraintEnd_toEndOf="@+id/pergunta_cardView"
         app:layout_constraintStart_toStartOf="@+id/pergunta_cardView"
         app:layout_constraintTop_toBottomOf="@+id/pergunta_cardView" />
 
     <Button
         android:id="@+id/txvFalso"
-        android:layout_width="115dp"
-        android:layout_height="75dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:text="Falso"
-        app:layout_constraintBottom_toBottomOf="@+id/txvVerdadeiro"
-        app:layout_constraintEnd_toEndOf="@+id/pergunta_cardView"
-        app:layout_constraintStart_toEndOf="@+id/txvVerdadeiro"
-        app:layout_constraintTop_toTopOf="@+id/txvVerdadeiro" />
+        app:layout_constraintEnd_toEndOf="@+id/txvVerdadeiro"
+        app:layout_constraintStart_toStartOf="@+id/txvVerdadeiro"
+        app:layout_constraintTop_toBottomOf="@+id/txvVerdadeiro" />
 </androidx.constraintlayout.widget.ConstraintLayout>
