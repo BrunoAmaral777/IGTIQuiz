@@ -25,38 +25,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         importQuestions(CONTENT);
-        
+
         readQuestions();
     }
 
     private void readQuestions() {
-        try {
-            FileInputStream fileInputStream = openFileInput("questions");
-            StringBuffer stringBuffer = new StringBuffer();
-            int i;
-            while ((i = fileInputStream.read())!= -1){
-                stringBuffer.append((char) i);
-            }
-            fileInputStream.close();
-            String detalhes [] = stringBuffer.toString().split("\n");
-            for (int j= 0; j<detalhes.length; j++){
-                Log.i("Leitura de dados", "readQuestions: " + detalhes[i]);
-            }
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+
     }
 
     private void importQuestions(String content) {
-        FileOutputStream fileOutputStream = null;
-        try {
-            fileOutputStream = openFileOutput("questions", MODE_PRIVATE);
-            fileOutputStream.write(content.getBytes());
-            fileOutputStream.close();
-            fileOutputStream.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        startActivity(new Intent());
+
     }
 }
