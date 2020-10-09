@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="50dp"
     android:id="@+id/container_toast"
     android:background="@drawable/toast_success"
     android:paddingStart="10dp"
@@ -18,6 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:layout_gravity="center"
         android:src="@drawable/ic_baseline_check_24" />
     <TextView
         android:id="@+id/txv_message"
