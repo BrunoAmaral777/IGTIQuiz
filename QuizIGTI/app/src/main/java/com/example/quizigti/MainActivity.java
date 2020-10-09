@@ -56,10 +56,6 @@ public class MainActivity extends AppCompatActivity {
                     pontuacao++;
                 } else {
                     showToast(ERROR, "Errou!");
-                    if (pontuacao <= 0)
-                        pontuacao = 0;
-                    else
-                    pontuacao--;
                 }
 
 
@@ -69,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra(PONTUACAO, Math.max(pontuacao, 0));
                     startActivity(intent);
                     finish();
-                }else {
+                } else {
                     new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -90,11 +86,6 @@ public class MainActivity extends AppCompatActivity {
                     pontuacao++;
                 } else {
                     showToast(ERROR, "Errou!");
-                    if (pontuacao <= 0)
-                        pontuacao = 0;
-                    else
-                        pontuacao--;
-
                 }
                 if (cont == questionsList.size() - 1) {
                     cont = 0;
@@ -102,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra(PONTUACAO, Math.max(pontuacao, 0));
                     startActivity(intent);
                     finish();
-                }else {
+                } else {
                     new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -121,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         ViewGroup container = findViewById(R.id.container_toast);
         View view = getLayoutInflater().inflate(R.layout.custom_toast, container);
         ImageView image = view.findViewById(R.id.imageView);
-        switch (type){
+        switch (type) {
             case SUCCESS:
                 view.setBackground(ContextCompat.getDrawable(this, R.drawable.toast_success));
                 image.setImageResource(R.drawable.ic_baseline_check_24);
