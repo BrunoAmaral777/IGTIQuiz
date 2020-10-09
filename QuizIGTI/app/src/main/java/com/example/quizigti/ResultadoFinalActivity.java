@@ -17,8 +17,13 @@ public class ResultadoFinalActivity extends AppCompatActivity {
         TextView txvProgres = findViewById(R.id.text_view_progress);
 
         Intent intent = getIntent();
-        int pontuacao = intent.getIntExtra(MainActivity.PONTUACAO,0);
-        progressBar.setProgress(pontuacao);
-        txvProgres.setText(pontuacao +"%");
+        int pontuacao = intent.getIntExtra(MainActivity.PONTUACAO, 0);
+
+        int percent = (pontuacao * 100) / 7;
+        if (percent>=100){
+            percent= 100;
+        }
+        progressBar.setProgress(percent);
+        txvProgres.setText(percent + "%");
     }
 }

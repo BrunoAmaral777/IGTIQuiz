@@ -44,44 +44,55 @@ public class MainActivity extends AppCompatActivity {
         btnTrue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (questionsList.get(cont).getReposta().toLowerCase().trim().equals("verdadeiro")) {
+                    Toast.makeText(MainActivity.this, "Acertou", Toast.LENGTH_SHORT).show();
+                    pontuacao++;
+                } else {
+                    Toast.makeText(MainActivity.this, "Errou", Toast.LENGTH_SHORT).show();
+                    if (pontuacao <= 0)
+                        pontuacao = 0;
+                    else
+                    pontuacao--;
+                }
+
+
                 if (cont == questionsList.size() - 1) {
                     cont = 0;
                     Intent intent = new Intent(MainActivity.this, ResultadoFinalActivity.class);
                     intent.putExtra(PONTUACAO, Math.max(pontuacao, 0));
                     startActivity(intent);
-
+                    finish();
+                }else {
+                    cont++;
+                    txvPerguta.setText(questionsList.get(cont).getPergunta());
                 }
-                if (questionsList.get(cont).getReposta().toLowerCase().trim().equals("verdadeiro")) {
-                    Toast.makeText(MainActivity.this, "Acertou", Toast.LENGTH_SHORT).show();
-                    pontuacao += 12.5;
-                } else {
-                    Toast.makeText(MainActivity.this, "Errou", Toast.LENGTH_SHORT).show();
-                    pontuacao -= 12.5;
-                }
-
-
-                cont++;
-                txvPerguta.setText(questionsList.get(cont).getPergunta());
             }
         });
         btnFalse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (questionsList.get(cont).getReposta().toLowerCase().trim().equals("falso")) {
+                    Toast.makeText(MainActivity.this, "Acertou", Toast.LENGTH_SHORT).show();
+                    pontuacao++;
+                } else {
+                    Toast.makeText(MainActivity.this, "Errou", Toast.LENGTH_SHORT).show();
+                    if (pontuacao <= 0)
+                        pontuacao = 0;
+                    else
+                        pontuacao--;
+
+                }
                 if (cont == questionsList.size() - 1) {
                     cont = 0;
                     Intent intent = new Intent(MainActivity.this, ResultadoFinalActivity.class);
                     intent.putExtra(PONTUACAO, Math.max(pontuacao, 0));
                     startActivity(intent);
+                    finish();
+                }else {
+                    cont++;
+                    txvPerguta.setText(questionsList.get(cont).getPergunta());
                 }
-                if (questionsList.get(cont).getReposta().toLowerCase().trim().equals("falso")) {
-                    Toast.makeText(MainActivity.this, "Acertou", Toast.LENGTH_SHORT).show();
-                    pontuacao += 12.5;
-                } else {
-                    Toast.makeText(MainActivity.this, "Errou", Toast.LENGTH_SHORT).show();
-                    pontuacao -= 12.5;
-                }
-                cont++;
-                txvPerguta.setText(questionsList.get(cont).getPergunta());
             }
         });
     }
