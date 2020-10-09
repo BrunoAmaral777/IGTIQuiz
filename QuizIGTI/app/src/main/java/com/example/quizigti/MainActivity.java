@@ -24,11 +24,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String PONTUACAO = "PONTUACAO";
     List<Questions> questionsList = new ArrayList<>();
     TextView txvPerguta;
     Button btnTrue;
     Button btnFalse;
     int cont = 0;
+    int pontuacao = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,14 +44,19 @@ public class MainActivity extends AppCompatActivity {
         btnTrue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (cont == questionsList.size() -1){
+                if (cont == questionsList.size() - 1) {
                     cont = 0;
-                    startActivity(new Intent(MainActivity.this, ResultadoFinalActivity.class));
+                    Intent intent = new Intent(MainActivity.this, ResultadoFinalActivity.class);
+                    intent.putExtra(PONTUACAO, Math.max(pontuacao, 0));
+                    startActivity(intent);
+
                 }
                 if (questionsList.get(cont).getReposta().toLowerCase().trim().equals("verdadeiro")) {
                     Toast.makeText(MainActivity.this, "Acertou", Toast.LENGTH_SHORT).show();
+                    pontuacao += 12.5;
                 } else {
                     Toast.makeText(MainActivity.this, "Errou", Toast.LENGTH_SHORT).show();
+                    pontuacao -= 12.5;
                 }
 
 
@@ -60,14 +67,18 @@ public class MainActivity extends AppCompatActivity {
         btnFalse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (cont == questionsList.size() -1){
+                if (cont == questionsList.size() - 1) {
                     cont = 0;
-                    startActivity(new Intent(MainActivity.this, ResultadoFinalActivity.class));
+                    Intent intent = new Intent(MainActivity.this, ResultadoFinalActivity.class);
+                    intent.putExtra(PONTUACAO, Math.max(pontuacao, 0));
+                    startActivity(intent);
                 }
                 if (questionsList.get(cont).getReposta().toLowerCase().trim().equals("falso")) {
                     Toast.makeText(MainActivity.this, "Acertou", Toast.LENGTH_SHORT).show();
+                    pontuacao += 12.5;
                 } else {
                     Toast.makeText(MainActivity.this, "Errou", Toast.LENGTH_SHORT).show();
+                    pontuacao -= 12.5;
                 }
                 cont++;
                 txvPerguta.setText(questionsList.get(cont).getPergunta());
