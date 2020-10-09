@@ -21,7 +21,7 @@ public class ResultadoFinalActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int pontuacao = intent.getIntExtra(MainActivity.PONTUACAO, 0);
 
-        int percent = (pontuacao * 100) / 7;
+        int percent = (pontuacao * 100) / 8;
         if (percent >= 100) {
             percent = 100;
         }

@@ -57,8 +57,6 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     showToast(ERROR, "Errou!");
                 }
-
-
                 if (cont == questionsList.size() - 1) {
                     cont = 0;
                     Intent intent = new Intent(MainActivity.this, ResultadoFinalActivity.class);
