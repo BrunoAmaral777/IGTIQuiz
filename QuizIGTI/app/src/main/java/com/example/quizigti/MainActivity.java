@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         btnTrue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (cont == questionsList.size()){
+                if (cont == questionsList.size() -1){
                     cont = 0;
                     startActivity(new Intent(MainActivity.this, ResultadoFinalActivity.class));
                 }
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         btnFalse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (cont == questionsList.size()){
+                if (cont == questionsList.size() -1){
                     cont = 0;
                     startActivity(new Intent(MainActivity.this, ResultadoFinalActivity.class));
                 }

@@ -25,6 +25,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         SharedPreferences preferences = getPreferences(MODE_PRIVATE);
         final SharedPreferences.Editor editor = preferences.edit();
         Boolean firstLogin = preferences.getBoolean("FIRST", true);
+
         if (firstLogin) {
             editor.putBoolean("FIRST", false);
             editor.commit();
