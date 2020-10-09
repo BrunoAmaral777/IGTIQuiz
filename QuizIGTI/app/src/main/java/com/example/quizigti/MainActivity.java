@@ -1,14 +1,19 @@
 package com.example.quizigti;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.telephony.mbms.StreamingServiceInfo;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +30,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public static final String PONTUACAO = "PONTUACAO";
+    public static final int SUCCESS = 1;
+    public static final int ERROR = 0;
     List<Questions> questionsList = new ArrayList<>();
     TextView txvPerguta;
     Button btnTrue;
@@ -45,10 +52,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (questionsList.get(cont).getReposta().toLowerCase().trim().equals("verdadeiro")) {
-                    Toast.makeText(MainActivity.this, "Acertou", Toast.LENGTH_SHORT).show();
+                    showToast(SUCCESS, "Acertou!!");
                     pontuacao++;
                 } else {
-                    Toast.makeText(MainActivity.this, "Errou", Toast.LENGTH_SHORT).show();
+                    showToast(ERROR, "Errou!");
                     if (pontuacao <= 0)
                         pontuacao = 0;
                     else
@@ -63,8 +70,14 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }else {
-                    cont++;
-                    txvPerguta.setText(questionsList.get(cont).getPergunta());
+                    new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            cont++;
+                            txvPerguta.setText(questionsList.get(cont).getPergunta());
+                        }
+                    }, 2000);
+
                 }
             }
         });
@@ -73,10 +86,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (questionsList.get(cont).getReposta().toLowerCase().trim().equals("falso")) {
-                    Toast.makeText(MainActivity.this, "Acertou", Toast.LENGTH_SHORT).show();
+                    showToast(SUCCESS, "Acertou!!");
                     pontuacao++;
                 } else {
-                    Toast.makeText(MainActivity.this, "Errou", Toast.LENGTH_SHORT).show();
+                    showToast(ERROR, "Errou!");
                     if (pontuacao <= 0)
                         pontuacao = 0;
                     else
@@ -90,11 +103,40 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }else {
-                    cont++;
-                    txvPerguta.setText(questionsList.get(cont).getPergunta());
+                    new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            cont++;
+                            txvPerguta.setText(questionsList.get(cont).getPergunta());
+                        }
+                    }, 2000);
+
                 }
             }
         });
+    }
+
+    private void showToast(int type, String text) {
+        Toast toast = new Toast(this);
+        ViewGroup container = findViewById(R.id.container_toast);
+        View view = getLayoutInflater().inflate(R.layout.custom_toast, container);
+        ImageView image = view.findViewById(R.id.imageView);
+        switch (type){
+            case SUCCESS:
+                view.setBackground(ContextCompat.getDrawable(this, R.drawable.toast_success));
+                image.setImageResource(R.drawable.ic_baseline_check_24);
+                break;
+            case ERROR:
+                view.setBackground(ContextCompat.getDrawable(this, R.drawable.toast_error));
+                image.setImageResource(R.drawable.ic_baseline_cancel_24);
+                break;
+        }
+
+        TextView txtMessage = view.findViewById(R.id.txv_message);
+        txtMessage.setText(text);
+        toast.setView(view);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     private void preenchendoListaDePerguntas() {

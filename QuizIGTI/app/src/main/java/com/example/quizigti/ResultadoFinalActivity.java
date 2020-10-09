@@ -10,9 +10,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class ResultadoFinalActivity extends AppCompatActivity {
-Button btnReturn = findViewById(R.id.btnReturn);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Button btnReturn = findViewById(R.id.btnReturn);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultado_final);
         ProgressBar progressBar = findViewById(R.id.progress_bar);
